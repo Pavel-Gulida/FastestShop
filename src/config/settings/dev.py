@@ -5,7 +5,7 @@ SECRET_KEY = "django-insecure-ql(&pwl22zi1_#qb!+huknes8_sd9-7jbd&=(=9y2qgfpm97#0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
-INSTALLED_APPS += []  # NOQA
+INSTALLED_APPS += ["django_extensions"]  # NOQA
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
