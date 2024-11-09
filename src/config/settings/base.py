@@ -10,11 +10,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms",
+    "crispy_bootstrap5",
+    'rest_framework',
     "common",
     "accounts",
     "products",
-    "crispy_forms",
-    "crispy_bootstrap5",
 ]
 
 AUTH_USER_MODEL = "accounts.Buyer"
