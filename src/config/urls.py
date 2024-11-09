@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from accounts.views import UserLogin, UserLogout, UserRegistration,UserActivationView
 from common.views import IndexView
+
+
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
@@ -25,4 +28,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path("api/", include("api.urls")),
     path("products/", include("products.urls")),
+    path("login/", UserLogin.as_view(), name="login"),
+    path("logout/", UserLogout.as_view(), name="logout"),
+    path("registration/", UserRegistration.as_view(), name="registration"),
+    path("activate/<str:uuid64>/<str:token>/", UserActivationView.as_view(), name="activate_user"),
+
 ]
