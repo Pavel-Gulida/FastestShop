@@ -18,7 +18,7 @@ class Category(models.Model):
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=64)
-    address = models.CharField(max_length=256)
+    address = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):
         return f"Manufacturer:{self.name}\nAddress:{self.address}"
@@ -26,14 +26,14 @@ class Manufacturer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=64)
-    description = models.CharField(max_length=512)
-    price = models.IntegerField(default=0)
+    description = models.CharField(max_length=512, null=True, blank=True)
+    price = models.FloatField(default=0)
     amount = models.IntegerField(default=1)
     category = models.ManyToManyField("products.Category",)
     manufacturer = models.ForeignKey("products.Manufacturer", on_delete=CASCADE)
 
     def __str__(self):
-        return f"Product:{self.name}\nPrice:{self.price}\nManufacturer:{self.name}"
+        return f"Product:{self.name}\nPrice:{self.price}\nManufacturer:{self.manufacturer.name}"
 
 
 class Basket(models.Model):
