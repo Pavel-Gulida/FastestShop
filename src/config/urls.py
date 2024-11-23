@@ -17,10 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from accounts.views import UserLogin, UserLogout, UserRegistration,UserActivationView
+from accounts.views import (UserActivationView, UserLogin, UserLogout,
+                            UserRegistration)
 from common.views import IndexView
-
-
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),

@@ -1,8 +1,7 @@
 from django.urls import include, path
-from rest_framework import routers
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from rest_framework import permissions
+from rest_framework import permissions, routers
 
 from api.views import ProductViewSet
 

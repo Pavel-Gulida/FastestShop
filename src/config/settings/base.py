@@ -1,7 +1,8 @@
 from datetime import timedelta
 from pathlib import Path
 
-from django.conf.global_settings import LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, LOGIN_URL, EMAIL_BACKEND
+from django.conf.global_settings import (EMAIL_BACKEND, LOGIN_REDIRECT_URL,
+                                         LOGIN_URL, LOGOUT_REDIRECT_URL)
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -68,9 +69,6 @@ EMAIL_HOST_USER = "djlms9041@gmail.com"
 EMAIL_HOST_PASSWORD = "hzgdrkpfhfzqbflw"
 EMAIL_PORT = 587
 EMAIL_FAIL_SILENTLY = False
-
-
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),

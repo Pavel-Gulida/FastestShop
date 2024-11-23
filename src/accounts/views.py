@@ -1,14 +1,13 @@
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
-from django.shortcuts import render # NOQA
+from django.shortcuts import render  # NOQA
 from django.urls import reverse_lazy
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView, RedirectView
 
 from accounts.forms import UserRegistrationForm
-
 from accounts.models import UserProfile
 from accounts.services.emails import send_registration_email
 from accounts.utils.token_generators import TokenGenerator
@@ -37,7 +36,6 @@ class UserRegistration(CreateView):
         return super().form_valid(form)
 
 
-
 class UserActivationView(RedirectView):
     url = reverse_lazy("index")
 
@@ -58,4 +56,3 @@ class UserActivationView(RedirectView):
             return super().get(request, *args, **kwargs)
 
         return HttpResponse("Wrong data!!!")
-
