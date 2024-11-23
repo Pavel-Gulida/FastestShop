@@ -2,7 +2,7 @@
 URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,8 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from accounts.views import (UserActivationView, UserLogin, UserLogout,
+                            UserRegistration)
+from common.views import IndexView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", IndexView.as_view(), name="index"),
+    path("admin/", admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path("api/", include("api.urls")),
+    path("products/", include("products.urls")),
+    path("login/", UserLogin.as_view(), name="login"),
+    path("logout/", UserLogout.as_view(), name="logout"),
+    path("registration/", UserRegistration.as_view(), name="registration"),
+    path("activate/<str:uuid64>/<str:token>/", UserActivationView.as_view(), name="activate_user"),
+
 ]
