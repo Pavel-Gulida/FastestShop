@@ -4,12 +4,14 @@ services:
     container_name: shop_container
     working_dir: /shop
     ports:
-      - "8008:8000"
+      - ${LOCAL_PORT}:${WSGI_PORT}
     command:
-      - ./commands/start_server_dev.sh
+      - ./commands/start_server_${MODE}.sh
     volumes:
       - ./src:/shop/src
       - ./commands:/shop/commands
+      - static_content:/quiz/src/static
+      - media_content:/quiz/src/media
     env_file:
       - .env
     depends_on:
@@ -37,22 +39,36 @@ services:
     depends_on:
       - postgres
 
-  mongodb:
-    image: mongo:noble
-    container_name: mongo_db
-    ports:
-      - "27017:27017"
+#  mongodb:
+#    image: mongo:noble
+#    container_name: mongo_db
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_data:/data/db
+#    env_file:
+#      - .env
+#    restart: on-failure
+
+  nginx:
+    image: nginx:1.27
     volumes:
-      - mongo_data:/data/db
+      - ./nginx:/etc/nginx/conf.d
+      - static_content:/shop/src/static
+      - media_content:/shop/src/media
+    ports:
+      - '80:80'
+      - '443:443'
     env_file:
       - .env
-    restart: on-failure
+    depends_on:
+      - backend
 
-#  nginx:
-#    ...
 #  redis:
 #    ...
 volumes:
   pg_data: { }
   pg_admin: { }
-  mongo_data: { }
+#  mongo_data: { }
+  static_content: { }
+  media_content: { }
