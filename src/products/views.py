@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
@@ -6,8 +6,18 @@ from products.models import Product
 
 
 class ListProducts(ListView):
+    model = Product
     template_name = "products_list.html"
-    queryset = Product.objects.all()
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        if (query is None):
+            object_list = super().get_queryset()
+        else:
+            object_list = Product.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        return object_list
 
 
 class CreateProduct(CreateView):

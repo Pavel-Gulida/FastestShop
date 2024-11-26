@@ -51,12 +51,13 @@
             </a>
           {% if user.is_authenticated %}
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">{# user.first_name|title }} {{ user.last_name|title #}Basket</a></li>
+              <li><a class="dropdown-item" href="{% url 'user_basket' %}">My Basket</a></li>
 
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="{% url 'login' %}">My Basket</a></li>
             <li><a class="dropdown-item" href="{% url 'registration' %}">Registration</a></li>
 
             <li><hr class="dropdown-divider"></li>
@@ -69,11 +70,10 @@
     </div>
   </header>
   {% block content %}
-  <p><a type="button" class="btn btn-light" href="{% url 'products:products_list' %}">Products</a>
-
+    {% include "products_list.html" %}
   {% endblock content %}
   <footer class="mt-auto text-white-50">
-    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+
   </footer>
 </div>
 

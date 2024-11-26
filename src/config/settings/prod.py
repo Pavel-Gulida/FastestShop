@@ -1,6 +1,7 @@
 import os
 
 from config.settings.base import *  # NOQA
+from config.settings.base import BASE_DIR
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -20,8 +21,8 @@ DATABASES = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-SRARIC_ROOT=BASE_DIR/'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
 STATIC_URL = "static/"
 
-MEDIA_ROOT=BASE_DIR/'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 MEDIA_URL = "media/"

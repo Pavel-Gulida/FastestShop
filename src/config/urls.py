@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from accounts.views import (UserActivationView, UserLogin, UserLogout,
-                            UserRegistration)
+from accounts.views import (BasketView, UserActivationView, UserLogin,
+                            UserLogout, UserRegistration)
 from common.views import IndexView
 
 urlpatterns = [
@@ -31,5 +31,5 @@ urlpatterns = [
     path("logout/", UserLogout.as_view(), name="logout"),
     path("registration/", UserRegistration.as_view(), name="registration"),
     path("activate/<str:uuid64>/<str:token>/", UserActivationView.as_view(), name="activate_user"),
-
+    path("basket/", BasketView.as_view(), name="user_basket"),
 ]

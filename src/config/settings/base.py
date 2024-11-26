@@ -70,6 +70,8 @@ EMAIL_HOST_PASSWORD = "hzgdrkpfhfzqbflw"
 EMAIL_PORT = 587
 EMAIL_FAIL_SILENTLY = False
 
+REGISTRATION_EMAIL_SUBJECT = "Registration email from FastestShop"
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],

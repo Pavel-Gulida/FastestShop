@@ -42,4 +42,4 @@ class Basket(models.Model):
     total_price = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.name}\nTotal price:{self.total_price}"
+        return f"{self.user}\nTotal price:{self.total_price}"

@@ -1,16 +1,18 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render  # NOQA
 from django.urls import reverse_lazy
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, RedirectView
+from django.views.generic import CreateView, ListView, RedirectView
 
 from accounts.forms import UserRegistrationForm
 from accounts.models import UserProfile
 from accounts.services.emails import send_registration_email
 from accounts.utils.token_generators import TokenGenerator
+from products.models import Basket
 
 
 class UserLogin(LoginView):
@@ -56,3 +58,8 @@ class UserActivationView(RedirectView):
             return super().get(request, *args, **kwargs)
 
         return HttpResponse("Wrong data!!!")
+
+
+class BasketView(ListView):
+    template_name = "user_basket.html"
+    queryset = Basket.objects.all()
