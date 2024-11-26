@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Products</th>
+            <th scope="col">Total price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>
+                    {% for product in object.products.all %}
+                      <p>{{ product.name }}
+                          {{ product.price }}
+                          {{ product.amount }}</p>
+                    {% endfor %}
+                </td>
+                <td>{{ object.total_price }}<p>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div><a type="button" class="btn btn-light" href="">Buy</a></div>
+
+
+{% endblock content %}
