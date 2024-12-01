@@ -1,0 +1,85 @@
+
+{% block content %}
+
+<style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 3;
+  top: 10px;
+  padding-top: 10px;
+}
+
+.left {
+  left: 0;
+}
+
+.left-1 {
+  left: 30%;
+}
+</style>
+
+
+<nav class="nav nav-masthead justify-content-center split left-1">
+    <div>
+        <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <p style="color:aqua">Category</p>
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser2">
+            {% for category in object_list.categories %}
+                <form action="{% url 'index' %}" method="get">
+                    <button class="dropdown-item" name="category" value="{{category.id}}">{{category}}</button>
+                </form>
+                <li></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+
+
+<div class="split left">
+    <form action="{% url 'index' %}" method="get">
+        <input size="25%" name="q" type="text" placeholder="Search...">
+    </form>
+</div>
+<p><p><p>
+
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th style="width:25%" >Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in object_list.products %}
+            <tr>
+                <td>{{ product.name }}<p>
+                 <p>{{ product.description }}</td>
+                <td>{{ product.price }}$</td>
+                <td>
+                    {% for category in product.category.all %}
+                      <p>{{ category }}</p>
+                    {% endfor %}
+                </td>
+                <td><p>Name: {{ product.manufacturer.name }}</p>
+                <p>Address: {{ product.manufacturer.address }}</p></td>
+                <td>
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'index' %}" method="get">
+                            <button class="btn btn-light" name="p" value="{{product.id}}">Add to basket</button>
+                        </from>
+                    {% else %}
+                        <a class="btn btn-light" href="{% url 'login' %}">Add to basket</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

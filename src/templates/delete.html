@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <form method="POST" style="margin: auto">
+        {% csrf_token %}
+        {{ object }}
+        <p></p>
+        <button type="submit" class="btn btn-info">Delete</button>
+    </form>
+
+{% endblock content %}

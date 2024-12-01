@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -59,3 +60,12 @@ class Buyer(AbstractBaseUser, PermissionsMixin):
 
     def get_registration_duration(self):
         return f"Time on site: {timezone.now() - self.date_joined}"
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    location = models.CharField(blank=True, null=True, max_length=120)
+    birthday = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user} ({self.pk})"

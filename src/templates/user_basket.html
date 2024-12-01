@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div><a type="button" class="btn btn-light" href="">Buy</a></div>
+
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Products</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+                {% for product in object_list.products.all %}
+                <tr>
+                    <td>{{ product.name }}: {{ product.price }}$<p>
+                     <p>{{ product.description }}
+                    </td>
+                    <td>
+                        <form action="{% url 'user_basket' %}" method="get">
+                            <button class="btn btn-light" name="p" value="{{product.id}}">Return</button>
+                        </from>
+                    </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock content %}
