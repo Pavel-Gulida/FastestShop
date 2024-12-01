@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.views.generic import ListView
 
-from products.models import Category, Product, Basket
+from products.models import Basket, Category, Product
 
 
 class IndexView(ListView):
@@ -23,7 +23,7 @@ class IndexView(ListView):
 
         product_id = self.request.GET.get("p")
         user = self.request.user
-        if(product_id is not None):
+        if (product_id is not None):
             user_basket = Basket.objects.get(user=user)
             user_basket.products.add(product_id)
 

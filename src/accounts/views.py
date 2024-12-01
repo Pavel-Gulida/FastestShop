@@ -1,15 +1,11 @@
-from itertools import product
-
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
-from django.db.models import Model, Q
 from django.http import HttpResponse
 from django.shortcuts import render  # NOQA
 from django.urls import reverse_lazy
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView, ListView, RedirectView
-from oauthlib.uri_validate import query
 
 from accounts.forms import UserRegistrationForm
 from accounts.models import UserProfile
@@ -68,7 +64,7 @@ class BasketView(ListView):
     template_name = "user_basket.html"
 
     def get_queryset(self):
-        product_id  = self.request.GET.get("p")
+        product_id = self.request.GET.get("p")
         user = self.request.user
         object_list = Basket.objects.get(user=user)
         if (product_id is not None):
