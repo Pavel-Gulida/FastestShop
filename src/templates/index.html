@@ -54,7 +54,11 @@
               <li><a class="dropdown-item" href="{% url 'user_basket' %}">My Basket</a></li>
 
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <li><button class="dropdown-item" type="submit">Logout</button></li>
+            </form>
+
           {% else %}
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item" href="{% url 'login' %}">My Basket</a></li>

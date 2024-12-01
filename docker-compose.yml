@@ -10,8 +10,8 @@ services:
     volumes:
       - ./src:/shop/src
       - ./commands:/shop/commands
-      - static_content:/quiz/src/static
-      - media_content:/quiz/src/media
+      - static_content:/shop/src/static
+      - media_content:/shop/src/media
     env_file:
       - .env
     depends_on:

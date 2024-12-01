@@ -7,8 +7,8 @@
   width: 50%;
   position: fixed;
   z-index: 3;
-  top: 0;
-  padding-top: 150px;
+  top: 10px;
+  padding-top: 10px;
 }
 
 .left {
@@ -21,10 +21,10 @@
 </style>
 
 
-<nav class="nav nav-masthead justify-content-center {#float-md-end#} split left-1">
+<nav class="nav nav-masthead justify-content-center split left-1">
     <div>
         <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-            <p style="color:blue">Category</p>
+            <p style="color:aqua">Category</p>
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser2">
             {% for category in object_list.categories %}
@@ -52,7 +52,7 @@
             <th scope="col">Price</th>
             <th scope="col">Category</th>
             <th scope="col">Manufacturer</th>
-            <th scope="col">Buy</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@
             <tr>
                 <td>{{ product.name }}<p>
                  <p>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.price }}$</td>
                 <td>
                     {% for category in product.category.all %}
                       <p>{{ category }}</p>
@@ -68,7 +68,15 @@
                 </td>
                 <td><p>Name: {{ product.manufacturer.name }}</p>
                 <p>Address: {{ product.manufacturer.address }}</p></td>
-                <td><a type="button" class="btn btn-light" href="">Buy</a></td>
+                <td>
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'index' %}" method="get">
+                            <button class="btn btn-light" name="p" value="{{product.id}}">Add to basket</button>
+                        </from>
+                    {% else %}
+                        <a class="btn btn-light" href="{% url 'login' %}">Add to basket</a>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
