@@ -1,6 +1,7 @@
 from datetime import timedelta
 from pathlib import Path
 
+from celery.schedules import crontab
 from django.conf.global_settings import (EMAIL_BACKEND, LOGIN_REDIRECT_URL,
                                          LOGIN_URL, LOGOUT_REDIRECT_URL)
 
@@ -122,3 +123,9 @@ USE_I18N = True
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = "redis://redis"
+CELERY_BROKER_BACKEND = "redis://redis"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"

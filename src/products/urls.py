@@ -1,13 +1,12 @@
 from django.urls import path
 
-from products.views import (CreateProduct, DeleteProducts, ListProducts,
-                            UpdateProduct)
+from products.views import (create_categories, create_manufacturers,
+                            create_products)
 
 app_name = "products"
 
 urlpatterns = [
-    path("", ListProducts.as_view(), name="products_list"),
-    path("create/", CreateProduct.as_view(), name="create_product"),
-    path("update/<int:pk>/", UpdateProduct.as_view(), name="update_product"),
-    path("delete/<int:pk>/", DeleteProducts.as_view(), name="delete_product"),
+    path("create_categories/", create_categories, name="create_categories"),
+    path("create_manufacturers/", create_manufacturers, name="create_manufacturers"),
+    path("create_products/", create_products, name="create_products"),
 ]
